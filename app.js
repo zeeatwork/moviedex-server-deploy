@@ -13,6 +13,12 @@ app.use(morgan(morganSetting));
 app.use(helmet());
 app.use(cors());
 
+app.get('/', (req, res) => {
+  res.json({
+    success:'page loaded'
+  });
+});
+
 app.use(function validateBearerToken(req, res, next) {
   const apiToken = process.env.API_TOKEN;
   const bearerToken = req.get('Authorization');
@@ -48,6 +54,9 @@ app.get('/movie', (req, res) => {
 
   res.json(filteredMovies);
 });
+
+// eslint-disable-next-line quotes
+
 
 app.use((error, req, res, next) => {
   let response;
